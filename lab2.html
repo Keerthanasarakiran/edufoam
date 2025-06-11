@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My web</title>
+  <style>
+    body{
+       font-family: Arial-sans-serif;
+       margin: 20px;
+    }
+    .error{
+       color: red;
+       font-size: 0.9em;
+    }
+   </style>
+<body>
+   <h1>Registration form</h1>
+   <form id="registrationform">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <div id="nameError" class="error"></div>
+    <br><br>
+      
+     <label for="email">email:</label>
+     <input type="email" id="email" name="email">
+     <div id="emailError" class="error"></div>
+     <br><br>
+
+     <label for="password">password:</label>
+     <input type="password" id="password" name="password">
+     <div id="passwordError" class="error"></div>
+     <br><br>
+    
+     <button type="button" onclick="validateform()">Submit</button>
+    </form>
+    <script src="script.js"</script>
+</body>
+</html>

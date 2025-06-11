@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FOAM Education - MBBS Abroad Consultants</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #005f73;
+            --secondary-color: #0a9396;
+            --accent-color: #ee9b00;
+            --dark-color: #001219;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #777;
+            --title-color: #FFA500; /* Orange color for title */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Libre Baskerville';
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #000000;
+            overflow-x: hidden;
+            font-size: 1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--title-color);
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Quote styling */
+        .quote {
+            font-style: italic;
+            position: relative;
+            padding: 0 30px;
+            font-size: 1.1rem;
+        }
+
+        .quote:before, .quote:after {
+            content: '"';
+            font-size: 1.5em;
+            color: var(--accent-color);
+            position: absolute;
+        }
+
+        .quote:before {
+            left: 0;
+            top: -10px;
+        }
+
+        .quote:after {
+            right: 0;
+            bottom: -20px;
+        }
+
+        /* Categories Section */
+        .categories-container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+        }
+
+        .category-lines {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 100%;
+            width: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .category-line {
+            height: 2px;
+            width: 100%;
+            background-color: var(--accent-color);
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .category-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .category-icon {
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .category-text {
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1001;
+            display: none;
+        }
+
+        .mobile-menu-btn .menu-line {
+            height: 4px;
+            width: 100%;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active .menu-line:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .mobile-menu-btn.active .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active .menu-line:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 80px 20px 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-nav.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .sidebar-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .submenu {
+            padding-left: 20px;
+            display: none;
+        }
+
+        .sidebar-nav li:hover .submenu {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar-nav.active + .main-content {
+            margin-left: 250px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('foam education.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            color: white;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-section {
+            flex: 1;
+            text-align: left;
+            padding-right: 50px;
+        }
+
+        .sliding-title {
+            font-size: clamp(2rem, 8vw, 4rem);
+            opacity: 0;
+            transition: all 1s ease-out;
+            margin-bottom: 1rem;
+            color: var(--title-color);
+            text-align: center;
+            position: relative;
+            left: 50%;
+            transform: translateX(50vw);
+        }
+
+        .sliding-title.slide-in {
+            transform: translateX(-50%);
+            opacity: 1;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        /* Our Aim Section */
+        .aim-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .aim-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image Section */
+        .image-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .image-box {
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-box:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Gallery Title */
+        .gallery-title {
+            text-align: center;
+            margin: 2.5rem 0;
+            color: var(--title-color);
+        }
+
+        /* Director's Message */
+        .director-message {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .director-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .director-text {
+            text-align: center;
+        }
+
+        .director-name {
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-top: 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .contact-info, .services-section, .testimonial-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .contact-info i, .working-hours i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .cta-section {
+            margin: 2rem 0;
+        }
+
+        .cta-section ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .cta-section li {
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .cta-section li i {
+            position: absolute;
+            left: 0;
+            top: 0.3rem;
+            color: var(--accent-color);
+        }
+
+        .service-item {
+            margin-bottom: 1.25rem;
+        }
+
+        .service-item h5 {
+            color: var(--accent-color);
+            margin-bottom: 0.6rem;
+        }
+
+        .service-item ul {
+            list-style: none;
+            margin-left: 1.25rem;
+        }
+
+        .service-item li {
+            margin-bottom: 0.3rem;
+            position: relative;
+        }
+
+        .service-item li:before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: -0.9rem;
+        }
+
+        blockquote {
+            font-style: italic;
+            position: relative;
+            padding-left: 1.9rem;
+            margin: 1.25rem 0;
+        }
+
+        blockquote:before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent-color);
+            position: absolute;
+            left: -0.6rem;
+            top: -0.9rem;
+            opacity: 0.3;
+        }
+
+        cite {
+            display: block;
+            margin-top: 0.6rem;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        /* Final Image Section */
+        .final-image {
+            padding: 4rem 0;
+            background-color: white;
+        }
+
+        .final-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+        }
+
+        /* Register Now Banner */
+        .register-banner {
+            position: fixed;
+            top: -100px;
+            left: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            z-index: 999;
+            transition: top 0.5s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .register-banner.show {
+            top: 0;
+        }
+
+        .register-banner a {
+            display: inline-block;
+            background-color: white;
+            color: var(--accent-color);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 0.9rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .register-banner a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Floating Message Button */
+        .floating-message {
+            position: fixed;
+            bottom: 1.9rem;
+            right: 1.9rem;
+            width: 3.8rem;
+            height: 3.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .floating-message:hover {
+            transform: scale(1.1);
+        }
+
+        /* Contact Popup */
+        .contact-popup {
+            position: fixed;
+            bottom: 6.3rem;
+            right: 1.9rem;
+            background-color: white;
+            padding: 1.25rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            width: 16rem;
+        }
+
+        .contact-popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .contact-popup h4 {
+            margin-bottom: 0.9rem;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .contact-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.9rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .contact-option:hover {
+            background-color: rgba(0, 95, 115, 0.1);
+        }
+
+        .contact-option i {
+            margin-right: 0.6rem;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        /* Social Media Icons */
+        .social-media {
+            margin: 1.25rem 0;
+        }
+
+        .social-media a {
+            display: inline-block;
+            margin-right: 0.9rem;
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .social-media a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .title-section {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .categories-container {
+                margin-left: 0;
+                margin-top: 2rem;
+                width: 100%;
+            }
+
+            .category-lines {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .sidebar-nav + .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar-nav.active + .main-content {
+                margin-left: 250px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .floating-message {
+                width: 3.1rem;
+                height: 3.1rem;
+                font-size: 1.2rem;
+                bottom: 1.25rem;
+                right: 1.25rem;
+            }
+
+            .contact-popup {
+                bottom: 5rem;
+                right: 1.25rem;
+                width: 14rem;
+            }
+
+            .register-banner {
+                padding: 0.6rem 0;
+            }
+
+            .register-banner a {
+                padding: 0.4rem 0.9rem;
+                margin-left: 0.6rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            html {
+                font-size: 14px;
+            }
+            
+            .category-item {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .category-icon {
+                margin-right: 0.6rem;
+                font-size: 1rem;
+            }
+
+            .category-text {
+                font-size: 0.8rem;
+            }
+
+            .register-banner {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu-btn">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#news">News Categories</a>
+                <ul class="submenu">
+                    <li><a href="#academic-news">Academic News</a></li>
+                    <li><a href="#alumni-news">Alumni News</a></li>
+                    <li><a href="#facilities-updates">Facilities Updates</a></li>
+                    <li><a href="#events-updates">Events Updates</a></li>
+                    <li><a href="#cultural-updates">Cultural Updates</a></li>
+                </ul>
+            </li>
+            <li><a href="#aim">Our Aim</a></li>
+            <li><a href="#director">Director's Message</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Register Now Banner -->
+    <div class="register-banner">
+        <span>Ready to start your journey?</span>
+        <a href="https://docs.google.com/forms/d/1gdo1MvCuENYOLUC6a_WtObu57PeuuXN1SQb-wUdxbTY/viewform" target="_blank">Register Now</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section with Sliding Title -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="title-section">
+                    <h1 class="sliding-title">FOAM EDUCATION</h1>
+                    <p class="tagline">EMPOWERING MEDICAL EDUCATION</p>
+                    <p class="quote">Tailored educational strategies that drive student success and support educators with expert consulting services in Kerala, India.</p>
+                </div>
+                <div class="categories-container">
+                    <div class="category-lines">
+                        <div class="category-line"></div>
+                        <div class="category-line"></div>
+                        <div class="category-line"></div>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-book-open category-icon"></i>
+                        <span class="category-text">Academic News</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-user-graduate category-icon"></i>
+                        <span class="category-text">Alumni News</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-building category-icon"></i>
+                        <span class="category-text">Facilities Updates</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-calendar-alt category-icon"></i>
+                        <span class="category-text">Events Updates</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-theater-masks category-icon"></i>
+                        <span class="category-text">Cultural Updates</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>At FOAM Education, we believe that every learner deserves the right guidance to reach their full potential.</p>
+                <p>Founded by Abi Russel Raj, a passionate educationist with over 2 years of experience in Student mentorship, academic planning, and International admissions, we specialize in helping students make informed, confident academic choices.</p>
+                <p>From India to Uzbekistan, Kazakhstan, Kyrgyzstan, Russia and more - we support global dreams.</p>
+            </div>
+        </section>
+
+        <!-- Our Aim Section -->
+        <section class="aim-section" id="aim">
+            <div class="container">
+                <h2>Our Aim</h2>
+                <div class="aim-content">
+                    <p>To successfully place students for pursuing MBBS Course at an institution that is only in the best interest of the student or their profile. To promote all-round development of students abilities and personalities, and empower the potential.To provide effortless and distinctive quality service and commit to improving continually. To maintain the high standard of professionalism, performance and quality to establish exemplary excellence in higher education, and work together with prospective students and overseas colleges, universities and associate</p>
+                    
+                    <p>We provide help and advice to International Students who pursue higher education abroad in Medical Field. We believe that education is a fundamental right and everyone should have access to quality higher education. With this view in mind, we strive to create opportunities for those who have genuine aspiration and honest intention, who seek excellent quality in tuition, student services, qualifications and career prospects post qualification.</p>
+                    
+                    <p>Since inception, we have transformed rapidly with reputation and popularity. Repeat admission of existing students to next levels after completion of their current course of study and recommendations from them to other students have mainly contributed to our growth, and driven us to take the lead over our competitors in the geographical area that we conduct our operational activities. We have returned our gratitude to them by developing our professional skills and knowledge from training and relevant education in student counselling.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Section -->
+        <section class="image-section">
+            <div class="container">
+                <div class="image-grid">
+                    <div class="image-box">
+                        <img src="russia.png" alt="Medical Students">
+                    </div>
+                    <div class="image-box">
+                        <img src="kk.jpeg" alt="Campus">
+                    </div>
+                    <div class="image-box">
+                        <img src="u.jpeg" alt="Campus">
+                    </div>
+                    <div class="image-box">
+                        <img src="georgia.jpeg" alt="Campus">
+                    </div>
+                    <div class="image-box">
+                        <img src="philip.jpg" alt="Campus">
+                    </div>
+
+                    <div class="image-box">
+                        <img src="kaz.png" alt="Campus">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Director's Message (without image) -->
+        <section class="director-message" id="director">
+            <div class="container">
+                <h2>Director's Message</h2>
+                <div class="director-content">
+                    <div class="director-text">
+                        <p>I am honored to serve as the Director of this organization that is responsible for bringing smiles to thousands of faces and assisting students to actualize their dreams of pursuing higher education. Our vision is to ensure the best medical education for Medical aspiring students, so they can become educational leaders nationally and internationally and serve the society. I want to strengthen outstanding clinical research with innovation to create a positive impact on the medical healthcare system. My aim as a Doctor is to train and develop a bright, energetic, and diverse next generation of physicians, scientists and allied health professionals.</p>
+                        <p class="director-name">- Mr. Abi Russel Raj</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-header">
+                    <h2>foamedu.com</h2>
+                    <h3>FOUNDATION OF ABROAD MBBS</h3>
+                    <h3>FOAM EDUCATION</h3>
+                    <p>EMPOWERING MEDICAL EDUCATION</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h4>CONTACT US</h4>
+                        <p>Let's work together to unlock your academic path.</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Location: Neyyattinkara,Tvm, kerala</p>
+                        <p>
+                         Email ID:
+                         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=foameducation@gmail.com" target="_blank" style="color: #1a73e8; text-decoration: none;">
+                           foameducation@gmail.com
+                         </a>
+                         </p>
+                         <p><i class="fas fa-phone"></i> For more details, contact: <a href="tel:+916282218454" style="color: #1a73e8; text-decoration: none;">+91 6282218454</a></p>
+                        
+                        <div class="social-media">
+                            <a href="https://www.instagram.com/foamedu_official/profilecard/?igsh=MW03aHZ1bno1YXlpaQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/foameducation?mibextid=LQQJ4d" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="https://youtube.com/@foameducation?si=oqXeOf35-QgZVodR" target="_blank"><i class="fab fa-youtube"></i></a>
+                        </div>
+                        
+                        <div class="cta-section">
+                            <h4>Start Your Journey Today</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Book a free Consultation</li>
+                                <li><i class="fas fa-check"></i> Explore our services</li>
+                            </ul>
+                            <p>Contact us to discover how we can help you succeed</p>
+                        </div>
+                        
+                        <div class="working-hours">
+                            <p><i class="fas fa-clock"></i> Working hrs: Mon - Sat</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-section">
+                        <h4>Our services</h4>
+                        <div class="service-item">
+                            <h5>Consulting:</h5>
+                            <ul>
+                                <li>Study abroad services:</li>
+                                <li>Country and course selection</li>
+                                <li>Visa assistance</li>
+                                <li>Scholarship Guidance</li>
+                            </ul>
+                        </div>
+                        <div class="service-item">
+                            <h5>Training:</h5>
+                        </div>
+                        <div class="service-item">
+                            <h5>Assessment:</h5>
+                        </div>
+                        <div class="service-item">
+                            <h5>Support:</h5>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-section">
+                        <h4>Testimonials:</h4>
+                        <blockquote>
+                            "Foamedu changed the way we approached education planning. From application to acceptance, the support was phenomenal."
+                            <cite>- Student Shifana</cite>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Image Section -->
+        <section class="final-image">
+            <div class="container">
+                <img src="last.jpeg" alt="FOAM Education Final Image">
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="image-section">
+            <div class="container">
+                <h2 class="gallery-title">Gallery Of TMA</h2>
+                <div class="image-grid">
+                    <div class="image-box">
+                        <img src="onepic.jpeg" alt="Medical Students">
+                    </div>
+                    <div class="image-box">
+                        <img src="secondpic.jpeg" alt="Campus">
+                    </div>
+                    <div class="image-box">
+                        <img src="thirdpic.jpeg" alt="Campus">
+                    </div>
+                    <div class="image-box">
+                        <img src="fourpic.jpeg" alt="Campus">
+                    </div>
+                    <div class="image-box">
+                        <img src="lastpic.jpeg" alt="Campus">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>Copyright ©2025 foamedu</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Floating Message Button -->
+    <div class="floating-message">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Contact Popup -->
+    <div class="contact-popup">
+        <h4>Contact Options</h4>
+        <div class="contact-option" onclick="window.location.href='mailto:foameducation@gmail.com'">
+            <i class="fas fa-envelope"></i>
+            <span>Email: foameducation@gmail.com</span>
+        </div>
+        <div class="contact-option" onclick="window.location.href='tel:+916282218454'">
+            <i class="fas fa-phone"></i>
+            <span>Call: +91 6282218454</span>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.sidebar-nav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // JavaScript for sliding title animation
+        window.addEventListener('load', function() {
+            document.querySelector('.sliding-title').classList.add('slide-in');
+            
+            // Show register banner after 1 second
+            setTimeout(function() {
+                document.querySelector('.register-banner').classList.add('show');
+            }, 1000);
+        });
+
+        // Floating message button functionality
+        const floatingMessage = document.querySelector('.floating-message');
+        const contactPopup = document.querySelector('.contact-popup');
+
+        floatingMessage.addEventListener('click', function() {
+            contactPopup.classList.toggle('active');
+        });
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!floatingMessage.contains(event.target) && !contactPopup.contains(event.target)) {
+                contactPopup.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
